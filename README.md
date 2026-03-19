@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # College ERP System 🚀
 
 A comprehensive, full-stack Enterprise Resource Planning (ERP) solution for higher education institutions. Built with modern web technologies, this system streamlines administrative workflows, faculty management, and student engagement.
@@ -78,3 +79,6 @@ A comprehensive, full-stack Enterprise Resource Planning (ERP) solution for high
 
 ## 📄 License
 Distributed under the MIT License. See `LICENSE` for more information.
+=======
+# college-erp-system
+>>>>>>> 8111371c01276f6ad3123e4dad537bc0539fc3fe
