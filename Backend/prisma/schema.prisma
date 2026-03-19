@@ -1,0 +1,288 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      Role
+  createdAt DateTime @default(now())
+
+  student   Student?
+  teacher   Teacher?
+}
+
+model Student {
+  id        String @id
+  user      User   @relation(fields: [id], references: [id])
+
+  rollNo    String @unique
+  name      String
+
+  branch    String
+  batchYear Int
+  currentSem Int
+
+  profileLocked Boolean @default(false)
+
+  // ── Personal ──
+  phone    String?
+  address  String?
+
+  // ── Parents ──
+  fatherName  String?
+  fatherPhone String?
+  motherName  String?
+  motherPhone String?
+
+  // ── Academic (10th / 12th) ──
+  tenthBoard        String?
+  tenthYear         Int?
+  tenthPercentage   Float?
+  twelfthBoard      String?
+  twelfthYear       Int?
+  twelfthPercentage Float?
+
+  attendanceRecords AttendanceRecord[]
+  fee               StudentFee?
+  payments          Payment[]
+  fines             Fine[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Teacher {
+  id        String @id
+  user      User   @relation(fields: [id], references: [id])
+
+  name       String
+  department String
+
+  // ── Profile ──
+  phone         String?
+  qualification String?
+  designation   String?
+
+  subjects           Subject[]
+  attendanceSessions AttendanceSession[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// ══════════════════════════════════════════════
+//  Subject — links teachers to classes
+// ══════════════════════════════════════════════
+model Subject {
+  id       String @id @default(uuid())
+  name     String
+  code     String @unique
+  branch   String
+  semester Int
+
+  teacherId String
+  teacher   Teacher @relation(fields: [teacherId], references: [id])
+
+  attendanceSessions AttendanceSession[]
+
+  createdAt DateTime @default(now())
+
+  @@index([teacherId])
+  @@index([branch, semester])
+}
+
+// ══════════════════════════════════════════════
+//  Attendance Session — one class on one date
+// ══════════════════════════════════════════════
+model AttendanceSession {
+  id String @id @default(uuid())
+
+  teacherId String
+  teacher   Teacher @relation(fields: [teacherId], references: [id])
+
+  subjectId String
+  subject   Subject @relation(fields: [subjectId], references: [id])
+
+  date       DateTime
+  status     SessionStatus @default(ACTIVE)
+  skipReason String?
+
+  records AttendanceRecord[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([teacherId])
+  @@index([subjectId])
+  @@index([date])
+}
+
+// ══════════════════════════════════════════════
+//  Attendance Record — per student per session
+// ══════════════════════════════════════════════
+model AttendanceRecord {
+  id String @id @default(uuid())
+
+  sessionId String
+  session   AttendanceSession @relation(fields: [sessionId], references: [id])
+
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id])
+
+  status AttendanceStatus
+
+  createdAt DateTime @default(now())
+
+  @@unique([sessionId, studentId])
+  @@index([studentId])
+}
+
+// ── Enums ──────────────────────────────────────
+
+enum Role {
+  ADMIN
+  TEACHER
+  STUDENT
+  ACCOUNTS
+}
+
+enum SessionStatus {
+  ACTIVE
+  COMPLETED
+  SKIPPED
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  EXCUSED
+}
+
+// ══════════════════════════════════════════════
+//  Marks Models
+// ══════════════════════════════════════════════
+
+model ExamMark {
+  id        String @id @default(uuid())
+  studentId String
+  subjectId String
+
+  examNo    Int    // 1, 2, 3
+
+  secA      Float
+  secB      Float
+  secC      Float
+
+  createdAt DateTime @default(now())
+
+  @@unique([studentId, subjectId, examNo])
+  @@index([studentId])
+  @@index([subjectId])
+}
+
+model AssignmentMark {
+  id        String @id @default(uuid())
+  studentId String
+  subjectId String
+
+  marks     Float  // out of 10
+
+  createdAt DateTime @default(now())
+
+  @@unique([studentId, subjectId])
+  @@index([studentId])
+  @@index([subjectId])
+}
+
+model AttendanceMark {
+  id        String @id @default(uuid())
+  studentId String
+  subjectId String
+
+  marks     Float  // out of 6
+
+  createdAt DateTime @default(now())
+
+  @@unique([studentId, subjectId])
+  @@index([studentId])
+  @@index([subjectId])
+}
+
+// ══════════════════════════════════════════════
+//  Accounts & Fees Models
+// ══════════════════════════════════════════════
+
+model FeeStructure {
+  id        String @id @default(uuid())
+  batchYear Int
+  branch    String
+  totalFee  Float
+
+  createdAt DateTime @default(now())
+
+  @@unique([batchYear, branch])
+}
+
+model StudentFee {
+  id          String @id @default(uuid())
+  studentId   String @unique
+  student     Student @relation(fields: [studentId], references: [id])
+
+  totalFee    Float
+  paidAmount  Float @default(0)
+  dueAmount   Float
+
+  paymentType PaymentType
+  hostelOpted Boolean @default(false)
+  busOpted    Boolean @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Payment {
+  id        String @id @default(uuid())
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id])
+
+  amount    Float
+  method    PaymentMethod
+  remark    String?
+
+  createdAt DateTime @default(now())
+
+  @@index([studentId])
+}
+
+model Fine {
+  id        String @id @default(uuid())
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id])
+
+  amount    Float
+  reason    String
+
+  createdAt DateTime @default(now())
+
+  @@index([studentId])
+}
+
+enum PaymentType {
+  CASH
+  SCHOLARSHIP
+  DRCC
+}
+
+enum PaymentMethod {
+  CASH
+  UPI
+  BANK
+}
