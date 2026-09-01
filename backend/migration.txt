@@ -1,0 +1,13 @@
+﻿Processing 10 students...
+  [DEL] 250001 validated for 8 semesters.
+  250002 validated for 8 semesters.
+  250003 validated for 8 semesters.
+  250004 validated for 8 semesters.
+  250005 validated for 8 semesters.
+  250006 validated for 8 semesters.
+  250007 validated for 8 semesters.
+  250008 validated for 8 semesters.
+  250009 validated for 8 semesters.
+  250010 validated for 8 semesters.
+
+Migration completed. Updated: 10, Skipped: 0

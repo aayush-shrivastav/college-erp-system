@@ -1,0 +1,28 @@
+import api from './axios.js'
+export const teacherApi = {
+  getProfile:        () => api.get('/teacher/profile'),
+  updateProfile:     d  => api.put('/teacher/profile', d),
+  getMentees:        () => api.get('/teacher/mentees'),
+  generatePins:      () => api.post('/teacher/generate-pins'),
+  getMenteePins:     () => api.get('/teacher/mentee-pins'),
+  getRegCode:        () => api.get('/teacher/registration-code'), // legacy compat
+  getPendingRegs:    () => api.get('/teacher/registrations/pending'),
+  approveReg:        id => api.post(`/teacher/registrations/${id}/approve`),
+  rejectReg:         (id, reason) => api.post(`/teacher/registrations/${id}/reject`, { reason }),
+  createSession:     d  => api.post('/teacher/attendance/sessions', d),
+  markAttendance:    (id, records) => api.post(`/teacher/attendance/sessions/${id}/mark`, { records }),
+  skipSession:       (id, d) => api.patch(`/teacher/attendance/sessions/${id}/skip`, d),
+  getSessionRecords: (id) => api.get(`/teacher/attendance/sessions/${id}/records`),
+  createExam:        d  => api.post('/teacher/exams', d),
+  upsertMarks:       (examId, studentId, d) => api.put(`/teacher/marks/${examId}/${studentId}`, d),
+  lockExam:          id => api.patch(`/teacher/exams/${id}/lock`),
+  getMyAssignments:  () => api.get('/teacher/my-assignments'),
+  getExamData:       (assignmentId, examNo) => api.get(`/teacher/my-assignments/${assignmentId}/exam/${examNo}`),
+  getAssignmentMarks: (assignmentId) => api.get(`/teacher/my-assignments/${assignmentId}/assignment-marks`),
+  upsertAssignmentMarks: (studentId, subjectId, d) => api.put(`/teacher/marks/${studentId}/${subjectId}/assignment`, d),
+  getCoordinatedSubjects: () => api.get('/teacher/coordinated-subjects'),
+  getCoordinatedTeam: (subjectId, p) => api.get(`/teacher/coordinated-subject/${subjectId}/team`, { params: p }),
+  uploadExamPaper: (examId, formData) => api.post(`/teacher/exams/${examId}/upload-paper`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  uploadCoordinatedExamPaper: (subjectId, formData) => api.post(`/teacher/coordinated-subject/${subjectId}/upload-paper`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+  getCoordinatedMarksAnalysis: (subjectId, p) => api.get(`/teacher/coordinated-subject/${subjectId}/marks-analysis`, { params: p }),
+}

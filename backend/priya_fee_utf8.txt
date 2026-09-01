@@ -1,0 +1,49 @@
+﻿{
+  "id": "6ed7aac7-6346-4caf-8303-f6f9328ce579",
+  "rollNo": "250005",
+  "name": "Ankit Gupta",
+  "phone": null,
+  "address": null,
+  "fatherName": null,
+  "fatherPhone": null,
+  "motherName": null,
+  "motherPhone": null,
+  "tenthPercent": null,
+  "twelfthPercent": null,
+  "profileLocked": false,
+  "isHostel": false,
+  "usesBus": false,
+  "branchId": "cbe2a146-cbe2-494c-b66a-ce4d54ca2ae5",
+  "batchId": "671de2d3-bf3f-4694-90dc-26648867e324",
+  "currentSem": 2,
+  "sectionId": null,
+  "mentorId": "b6f47206-6f82-4dff-b430-782ca93121ba",
+  "feeProfile": {
+    "id": "7e7caf25-d849-4e60-85a8-f3013520630a",
+    "studentId": "6ed7aac7-6346-4caf-8303-f6f9328ce579",
+    "category": "GENERAL",
+    "isHosteller": false,
+    "hostelRoomId": null,
+    "usesBus": false,
+    "busRouteId": null,
+    "usesMess": false,
+    "messPlanId": null,
+    "hasScholarship": false,
+    "scholarshipName": null,
+    "ledgers": [
+      {
+        "id": "6636328a-a1ba-4576-9730-ec75da43e86d",
+        "studentFeeProfileId": "7e7caf25-d849-4e60-85a8-f3013520630a",
+        "semester": 2,
+        "baseFeeDue": "40000",
+        "hostelFeeDue": "0",
+        "busFeeDue": "0",
+        "messFeeDue": "0",
+        "scholarshipAwaited": "0",
+        "scholarshipVerified": "0",
+        "totalPaid": "0",
+        "netDue": "40000"
+      }
+    ]
+  }
+}

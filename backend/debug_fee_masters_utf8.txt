@@ -1,0 +1,18 @@
+﻿Total FeeMasters: 1
+[
+  {
+    "id": "135ab2cd-bf02-4806-8f48-859e6dfef565",
+    "batchId": "671de2d3-bf3f-4694-90dc-26648867e324",
+    "branchId": "cbe2a146-cbe2-494c-b66a-ce4d54ca2ae5",
+    "semester": 0,
+    "tuitionFee": "320000",
+    "developmentFee": "0",
+    "examFee": "0",
+    "hostelFee": "80000",
+    "busFee": "0",
+    "messFee": "120000",
+    "otherFee": "0",
+    "totalFee": "520000",
+    "createdAt": "2026-03-26T22:07:38.757Z"
+  }
+]

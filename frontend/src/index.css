@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply min-h-screen text-slate-800 antialiased transition-colors duration-700;
+    background-color: #f0f4f8;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(253,16%,70%,0.3) 0, transparent 50%), 
+      radial-gradient(at 50% 0%, hsla(225,39%,60%,0.3) 0, transparent 50%), 
+      radial-gradient(at 100% 0%, hsla(339,49%,60%,0.3) 0, transparent 50%);
+    background-attachment: fixed;
+  }
+  .dark body {
+    @apply text-slate-100;
+    background-color: #030712;
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(263, 85%, 20%, 0.45) 0px, transparent 50%),
+      radial-gradient(at 50% 0%, hsla(245, 80%, 15%, 0.4) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(280, 80%, 20%, 0.35) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+  * { @apply box-border; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-tr from-indigo-600 to-blue-500 text-white px-5 py-2.5 rounded-xl font-medium
+           shadow-[0_8px_20px_rgb(99,102,241,0.3)] hover:shadow-[0_12px_25px_rgb(99,102,241,0.4)] hover:-translate-y-0.5
+           active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none
+           transition-all duration-300 text-sm dark:from-indigo-500 dark:to-blue-600 dark:shadow-[0_8px_20px_rgb(99,102,241,0.15)];
+  }
+  .btn-outline {
+    @apply border border-slate-200 bg-white/50 backdrop-blur-sm text-slate-700 px-5 py-2.5 rounded-xl font-medium
+           shadow-sm hover:bg-white hover:border-indigo-300 hover:shadow-md hover:-translate-y-0.5
+           active:scale-95 disabled:opacity-50 disabled:transform-none transition-all duration-300 text-sm
+           dark:border-slate-700/50 dark:bg-slate-800/50 dark:text-slate-200 dark:hover:bg-slate-700/80 dark:hover:border-indigo-500/50;
+  }
+  .btn-danger {
+    @apply bg-gradient-to-tr from-rose-600 to-red-500 text-white px-5 py-2.5 rounded-xl font-medium
+           shadow-[0_8px_20px_rgb(225,29,72,0.3)] hover:shadow-[0_12px_25px_rgb(225,29,72,0.4)] hover:-translate-y-0.5
+           active:scale-95 disabled:opacity-50 transition-all duration-300 text-sm
+           dark:from-rose-500 dark:to-red-600 dark:shadow-[0_8px_20px_rgb(225,29,72,0.15)];
+  }
+  .input {
+    @apply w-full bg-white/60 backdrop-blur-sm border border-slate-200/80 rounded-xl px-4 py-3 text-sm
+           focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500 focus:bg-white
+           dark:bg-slate-800/40 dark:border-slate-700/60 dark:text-slate-100 dark:focus:ring-indigo-400/30 dark:focus:border-indigo-400 dark:focus:bg-slate-800/80
+           transition-all duration-300 shadow-inner placeholder-slate-400 dark:placeholder-slate-500;
+  }
+  .card {
+    @apply bg-white/40 backdrop-blur-2xl rounded-3xl shadow-[0_8px_32px_rgba(0,0,0,0.03)] border border-white/60
+           hover:shadow-[0_12px_48px_rgba(0,0,0,0.06)] hover:border-white/80 hover:-translate-y-0.5
+           dark:bg-slate-900/40 dark:border-white/5 dark:shadow-[0_8px_32px_rgba(0,0,0,0.2)] 
+           dark:hover:border-white/10 dark:hover:bg-slate-800/40
+           transition-all duration-500 relative overflow-hidden;
+  }
+  .glass-sidebar {
+    @apply bg-white/20 backdrop-blur-3xl border-r border-white/20 
+           dark:bg-slate-950/20 dark:border-white/5 shadow-2xl;
+  }
+  .glass-nav-item {
+    @apply flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 font-medium;
+  }
+  .glass-nav-item-active {
+    @apply glass-nav-item bg-indigo-600/90 text-white shadow-lg shadow-indigo-500/30 -translate-x-1 scale-105;
+  }
+  .glass-nav-item-inactive {
+    @apply glass-nav-item text-slate-500 hover:bg-white/40 dark:text-slate-400 dark:hover:bg-white/5 hover:text-indigo-600 dark:hover:text-indigo-400;
+  }
+  .badge-green  { @apply bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-semibold tracking-wide dark:bg-emerald-900/30 dark:text-emerald-400 dark:border dark:border-emerald-800/30; }
+  .badge-red    { @apply bg-rose-100 text-rose-700 px-3 py-1 rounded-full text-xs font-semibold tracking-wide dark:bg-rose-900/30 dark:text-rose-400 dark:border dark:border-rose-800/30; }
+  .badge-blue   { @apply bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-semibold tracking-wide dark:bg-indigo-900/30 dark:text-indigo-400 dark:border dark:border-indigo-800/30; }
+  .badge-amber  { @apply bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-semibold tracking-wide dark:bg-amber-900/30 dark:text-amber-400 dark:border dark:border-amber-800/30; }
+  .badge-purple { @apply bg-fuchsia-100 text-fuchsia-700 px-3 py-1 rounded-full text-xs font-semibold tracking-wide dark:bg-fuchsia-900/30 dark:text-fuchsia-400 dark:border dark:border-fuchsia-800/30; }
+}

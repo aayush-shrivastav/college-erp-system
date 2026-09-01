@@ -1,0 +1,15 @@
+﻿[
+  {
+    "id": "f252770e-d30e-4c52-8cba-62a788996794",
+    "studentFeeProfileId": "c8ae5bcd-6d9d-4c9d-9763-22f9e069f1ea",
+    "semester": 2,
+    "baseFeeDue": "40000",
+    "hostelFeeDue": "0",
+    "busFeeDue": "0",
+    "messFeeDue": "0",
+    "scholarshipAwaited": "0",
+    "scholarshipVerified": "0",
+    "totalPaid": "0",
+    "netDue": "40000"
+  }
+]
